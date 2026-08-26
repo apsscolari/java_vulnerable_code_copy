@@ -20,9 +20,22 @@ an isolated test environment. Never deploy it or expose port 8080 to a network.
 | `POST /api/login` | Hard-coded credential and log injection | CWE-798, CWE-117 |
 
 The vulnerable code is intentionally direct so data-flow analyzers can connect
-Spring request parameters to their sinks. Dependencies themselves are kept current;
-the exercise is in the application source, not in downloading historically unsafe
-libraries.
+Spring request parameters to their sinks.
+
+## Included vulnerable dependencies
+
+These direct dependencies are deliberately pinned to vulnerable versions so GitHub
+Dependabot can create alerts and security update pull requests:
+
+| Dependency | Version | Example advisory |
+| --- | --- | --- |
+| `org.apache.logging.log4j:log4j-core` | 2.14.1 | CVE-2021-44228 (Log4Shell) |
+| `org.apache.commons:commons-text` | 1.9 | CVE-2022-42889 (Text4Shell) |
+| `org.apache.commons:commons-compress` | 1.21 | CVE-2024-25710 |
+
+Do not use these versions in a real application. Dependabot alerts appear only after
+the repository is pushed to GitHub with Dependabot alerts enabled; security updates
+must also be enabled for automatic remediation pull requests.
 
 ## Build and test
 
