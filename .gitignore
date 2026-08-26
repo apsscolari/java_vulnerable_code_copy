@@ -1,0 +1,7 @@
+target/
+codeql-db/
+results.sarif
+.idea/
+.vscode/
+*.iml
+*.log
